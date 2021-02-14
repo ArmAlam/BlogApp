@@ -1,21 +1,20 @@
 import React, {useState} from "react";
-import {withFormik} from "formik";
+import {withFormik, Form, ErrorMessage, Field} from "formik";
+import * as Yup from 'yup';
 
 
-const Register = ({values, handleChange, handleSubmit, handleBlur, isSubmitting}) => {
+const Register = ({
+    isSubmitting
+    }) => {
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
+            <Form>
                 <label htmlFor="firstName">First Name</label>
-                <input type="text"
-                       name='firstName'
-                       value={values.firstName }
-                       onChange={handleChange}
-                       onBlur={handleBlur}
-                />
-                <button disabled={isSubmitting} type="submit" >Submit</button> // disable button during form submission
-            </form>
+                <Field name='firstName' type='text'/>
+                <ErrorMessage name='firstName' component='div' />
+                <button disabled={isSubmitting} type="submit" >Submit</button> {/*{disable button during form submission}*/}
+            </Form>
         </>
     );
 }
@@ -29,6 +28,12 @@ export default withFormik({
             firstName: '' // returning initial state value
         }
     },
+    validationSchema:Yup.object().shape({
+        firstName: Yup.string()
+            .min(2, 'Must be 2 characters')
+            .max(10, 'Can \'t be more than 10')
+            .required('First name is required')
+    }),
     handleSubmit(values, {resetForm, setSubmitting}) {
         setTimeout( () => {
             setSubmitting(false);
