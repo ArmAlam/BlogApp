@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {withFormik, Form, ErrorMessage, Field} from "formik";
-import {TextField, Button} from "@material-ui/core";
+import {TextField, Button, Typography} from "@material-ui/core";
 import * as Yup from 'yup';
 
 
@@ -13,6 +13,9 @@ const Login = ({
 
     return (
         <>
+            <Typography variant='h5' component='h2'>
+                Login
+            </Typography>
             <Form noValidate>
                 <TextField
                     type='email'

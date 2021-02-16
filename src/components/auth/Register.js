@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {withFormik, Form, ErrorMessage, Field} from "formik";
-import {Button, TextField} from "@material-ui/core";
+import {Button, TextField, Typography} from "@material-ui/core";
 import * as Yup from 'yup';
 
 
@@ -13,6 +13,9 @@ const Register = ({
 
     return (
         <>
+            <Typography variant='h5' component='h2'>
+                Register
+            </Typography>
             <Form noValidate>
                 {/*<label htmlFor="firstName">First Name</label>*/}
                 {/*<Field name='firstName' type='text'/>*/}
