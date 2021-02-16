@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {withFormik, Form, ErrorMessage, Field} from "formik";
-import {TextField} from "@material-ui/core";
+import {Button, TextField} from "@material-ui/core";
 import * as Yup from 'yup';
 
 
@@ -19,7 +19,7 @@ const Register = ({
                 {/*<ErrorMessage name='firstName' component='div' />*/}
                 <TextField
                     type='text'
-                    label='firstName'
+                    label='First Name'
                     name='firstName'
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -29,7 +29,7 @@ const Register = ({
                 <ErrorMessage name='firstName' component='div' />
                 <TextField
                     type='text'
-                    label='lastName'
+                    label='Last Name'
                     name='lastName'
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -39,7 +39,7 @@ const Register = ({
                 <ErrorMessage name='lastName' component='div' />
                 <TextField
                     type='email'
-                    label='email'
+                    label='Email'
                     name='email'
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -49,7 +49,7 @@ const Register = ({
                 <ErrorMessage name='email' component='div' />
                 <TextField
                     type='password'
-                    label='password'
+                    label='Password'
                     name='password'
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -59,7 +59,7 @@ const Register = ({
                 <ErrorMessage name='password' component='div' />
                 <TextField
                     type='password'
-                    label='confirmPassword'
+                    label='Confirm Password'
                     name='confirmPassword'
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -67,7 +67,12 @@ const Register = ({
                     fullWidth
                 />
                 <ErrorMessage name='confirmPassword' component='div' />
-                <button disabled={isSubmitting} type="submit" >Submit</button> {/*{disable button during form submission}*/}
+                <Button disabled={isSubmitting}
+                        type="submit"
+                        variant='contained'
+                        color='primary' >
+                    Register
+                </Button> {/*{disable button during form submission}*/}
             </Form>
         </>
     );
