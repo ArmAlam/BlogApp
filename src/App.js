@@ -23,7 +23,7 @@ function App() {
                   />
                   <Route path='/add' component={AddPost}/>
                   <Route path='/edit/:id' component={EditPost}/>
-                  <Route path='/post/:id' component={PostDetails}/>
+                  <Route path='/post/:id' render={ () => <PostDetails posts={posts}/>}/>
                   <Route path='/register' component={Register}/>
                   <Route path='/login' component={Login}/>
                   <Route component={NotFound } />
