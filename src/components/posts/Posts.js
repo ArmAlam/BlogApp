@@ -1,9 +1,15 @@
 import React from 'react';
+import {Paper} from "@material-ui/core";
+import PostSummary from "./PostSummary";
 
-const Posts = () => {
+const Posts = ({posts}) => {
     return (
         <>
-            <h3>Add Post</h3>
+            {posts.map(post => (
+                <Paper elevation={4} key={post.id}>
+                    <PostSummary post={post} />
+                </Paper>
+            ))}
         </>
     );
 }

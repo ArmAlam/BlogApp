@@ -4,12 +4,12 @@ import Dashboard from "./Dashboard";
 import Sidebar from "./Sidebar";
 
 
-const DashboardIndex = () =>
+const DashboardIndex = ({posts}) =>
 {
     return (
         <Grid container spacing={2}>
             <Grid item xs={8}>
-                <Dashboard/>
+                <Dashboard posts={posts}/>
             </Grid>
 
             <Grid item xs={4}>

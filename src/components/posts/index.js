@@ -5,4 +5,4 @@ import PostForm from "./PostForm";
 import Posts from "./Posts";
 import PostSummary from "./PostSummary";
 
-export {AddPost, EditPost, PostDetails};
+export {AddPost, EditPost, PostDetails,Posts};
