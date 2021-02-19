@@ -1,6 +1,7 @@
 import React from 'react';
 import {Typography, Button} from "@material-ui/core";
 import {Link} from 'react-router-dom';
+import {truncateText} from '../../utils';
 
 const PostSummary = ({post}) => {
     return (
@@ -9,7 +10,7 @@ const PostSummary = ({post}) => {
                 {post.title}
             </Typography>
             <Typography variant='body2'>
-                {post.body}
+                {truncateText(post.body, 50)}
             </Typography>
             <Button
                 component={Link}

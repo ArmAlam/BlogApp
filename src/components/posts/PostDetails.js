@@ -1,9 +1,19 @@
 import React from 'react';
-import {withRouter} from 'react-router-dom';
+import {withRouter, Link} from 'react-router-dom';
 import {Typography, Button} from "@material-ui/core";
 
-const PostDetails = ({posts, match: {params: {id}}}) => {
+const PostDetails = ({
+        posts,
+        match: {params: {id}},
+        history,
+        deletePost
+    }) => {
     const findPost = posts.find(post => post.id === Number(id));
+
+    const handleDelete = (id) => {
+        deletePost(id);
+        history.push('/');
+    };
     return (
         <>
             <Typography variant='h5' component='h3'>
@@ -16,10 +26,19 @@ const PostDetails = ({posts, match: {params: {id}}}) => {
             <Typography variant='caption' display='block' align='right'>
                 Written by: Arm
             </Typography>
-            <Button variant='contained' color='primary' >
+            <Button
+                component={Link}
+                to={`/edit/${findPost.id}`}
+                variant='contained'
+                color='primary'
+            >
                 Edit
             </Button>
-            <Button variant='contained' color='primary' >
+            <Button
+                variant='contained'
+                color='primary'
+                onClick={() => handleDelete(findPost.id)}
+            >
                 Delete
             </Button>
         </>
