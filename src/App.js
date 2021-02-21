@@ -7,14 +7,12 @@ import {NotFound} from './components/pages/index';
 import {DashboardIndex} from "./components/dashboard";
 import {AddPost, EditPost, PostDetails} from './components/posts'
 import postsData from "./data/data";
+import usePostHook from "./components/hooks/post.hook";
 
 function App() {
 
-    const [posts, setPosts] = useState(postsData);
-
-    const deletePost = (id) => {
-        setPosts(posts.filter(post => post.id !== id));
-    }
+    // const [posts, setPosts] = useState(postsData);
+    const {posts, addPosts, updatePost, deletePost} =usePostHook(postsData); // applying custom hook and destructuring
 
   return (
     <>
