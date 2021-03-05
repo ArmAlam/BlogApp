@@ -7,7 +7,7 @@ import LoginLinks from "./LoginLinks";
 
 const Header = () => {
 
-    const [auth, setAuth] = useState(false);
+    const [auth, setAuth] = useState(true);
 
 
 

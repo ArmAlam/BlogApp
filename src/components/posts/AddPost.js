@@ -1,10 +1,9 @@
 import React from 'react';
+import PostForm from "./PostForm";
 
 const AddPost = () => {
     return (
-        <>
-            <h3>Add Post</h3>
-        </>
+        <PostForm/>
     );
 }
 
