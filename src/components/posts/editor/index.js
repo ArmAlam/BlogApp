@@ -1,39 +1,34 @@
 import React from "react";
 import {Editor} from "slate-react";
-
-const CodeNode = (props) => {
-    const {attributes, children} = props;
-    return (
-        <pre>
-            <code {...attributes}>
-                {children}
-            </code>
-        </pre>
-    );
-}
+import renderBlock from "./renderBlock";
+import renderMark from "./renderMark";
 
 const MyEditor = ({onChange, value}) =>
 {
     const onKeyDown = (event, editor, next) => {
-        if(event.key != '`' || !event.ctrlKey) return next();
+        if(!event.ctrlKey) return next();
         event.preventDefault();
+        switch (event.key) {
+            case ('`'):
+                const isCode = editor.value.blocks.some( block => block.type === 'code' );
+                editor.setBlocks(isCode ? 'paragraph' : 'code')
+                return ;
+            case 'b':
+                return editor.toggleMark('bold');
+            case 'i':
+                return editor.toggleMark('italic');
+            case 'u':
+                return editor.toggleMark('underline');
 
-        const isCode = editor.value.blocks.some( block => block.type === 'code' );
-
-        editor.setBlocks(isCode ? 'paragraph' : 'code')
-    }
-
-    const renderBlock = (props, editor, next) => {
-        const {attributes, children, node} = props;
-        switch (node.type){
-            case 'paragraph':
-                return <p {...attributes}>{children}</p>;
-            case 'code':
-                return <CodeNode {...props} />
             default:
                 return next();
         }
+
     }
+
+
+
+
 
     return (
         <Editor
@@ -41,6 +36,7 @@ const MyEditor = ({onChange, value}) =>
             onChange={onChange}
             onKeyDown={onKeyDown}
             renderBlock={renderBlock}
+            renderMark={renderMark}
         />
     );
 }
