@@ -14,9 +14,9 @@
     "react-scripts": "3.1.1",
     "redux": "^4.0.4",
     "slate": "^0.47.8",
-    "slate-html-serializer": "^0.8.10",
+    "slate-html-serializer": "^0.8.13",
     "slate-react": "^0.22.8",
-    "uuid": "^3.3.3",
+    "uuid": "^8.3.2",
     "yup": "^0.27.0"
   },
   "scripts": {

@@ -1,9 +1,13 @@
 import React, {useState} from 'react';
 import {Editor} from 'slate-react';
+import {withRouter} from 'react-router-dom';
+import {v4 as uuid} from 'uuid';
 import initialValue from "./editor/value";
 import {TextField, Button, Typography, Select, ListItemText, MenuItem} from "@material-ui/core";
 import MyEditor from "./editor";
+import html from "./editor/rules";
 
+// start from installing uuid
 
 const categories = [{
         label: 'Travel',
@@ -19,7 +23,7 @@ const categories = [{
     }
 ]
 
-const PostForm = () => {
+const PostForm = ({addPost, history}) => {
 
     const [title, setTitle] = useState('');
     const [error, setError] = useState(false);
@@ -30,7 +34,8 @@ const PostForm = () => {
 
         if(value.document !== editor.document)
         {
-            localStorage.setItem('content', JSON.stringify(value.toJSON()));
+            const serializedValue = html.serialize(value);
+            localStorage.setItem('content', serializedValue);
         }
         setEditor(value);
     }
@@ -49,7 +54,27 @@ const PostForm = () => {
         e.preventDefault();
         if(title === '') {
             setError(true);
+            return ;
         }
+
+        if(category && category.length === 0)
+        {
+            setError(true);
+            return ;
+        }
+
+        const post = {
+            id: uuid(),
+            title,
+            img_url: '3.jpg',
+            categories: category,
+            body: localStorage.getItem('content'),
+        }
+
+        addPost(post);
+
+        // redirecting
+        history.push('/');
     }
 
     return (
@@ -72,13 +97,14 @@ const PostForm = () => {
                 />
 
                 <Select
+                    error={error}
                     multiple
                     displayEmpty
                     onChange={handleCategory}
                     value={category}
                     renderValue={selected => selected && selected.length === 0
                         ?
-                        'Category'
+                        'select category'
                         :
                         selected.join(', ')}
                 >
@@ -91,6 +117,7 @@ const PostForm = () => {
                     }
 
                 </Select>
+                <br/>
                 <Button
                     type='submit'
                     variant='contained'
@@ -104,4 +131,4 @@ const PostForm = () => {
 }
 
 
-export default PostForm;
+export default withRouter(PostForm);

@@ -1,6 +1,6 @@
 const postsData = [
     {
-        id: 1,
+        id: '1',
         title: 'Sample post title',
         body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi consectetur dicta ' +
             'eligendi enim ex hic iste minima modi quia quidem quod repellat reprehenderit rerum tempora tenetur, ' +
@@ -9,7 +9,7 @@ const postsData = [
         img_url: '1.jpg'
     },
     {
-        id: 2,
+        id: '2',
         title: 'Sample post title',
         body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi consectetur dicta ' +
             'eligendi enim ex hic iste minima modi quia quidem quod repellat reprehenderit rerum tempora tenetur, ' +
@@ -18,7 +18,7 @@ const postsData = [
         img_url: '2.jpg'
     },
     {
-        id: 3,
+        id: '3',
         title: 'Sample post title',
         body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi consectetur dicta ' +
             'eligendi enim ex hic iste minima modi quia quidem quod repellat reprehenderit rerum tempora tenetur, ' +

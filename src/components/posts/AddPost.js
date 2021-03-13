@@ -1,9 +1,9 @@
 import React from 'react';
 import PostForm from "./PostForm";
 
-const AddPost = () => {
+const AddPost = ({addPost}) => {
     return (
-        <PostForm/>
+        <PostForm addPost={addPost}/>
     );
 }
 

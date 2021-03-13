@@ -23,7 +23,7 @@ function App() {
                          render={ () => <DashboardIndex posts={posts}
                          /> }
                   />
-                  <Route path='/add' component={AddPost}/>
+                  <Route path='/add' render={ () => <AddPost addPost={addPosts}/>} />
                   <Route path='/edit/:id' component={EditPost}/>
                   <Route path='/post/:id' render={ () => <PostDetails posts={posts} deletePost={deletePost}/>}/>
                   <Route path='/register' component={Register}/>
