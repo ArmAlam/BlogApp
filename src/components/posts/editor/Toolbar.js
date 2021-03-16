@@ -1,11 +1,13 @@
 import React from "react";
+import {withStyles} from "@material-ui/core";
+import styles from "../styles";
 
-const Toolbar = ({children}) => {
+const Toolbar = ({children, classes}) => {
     return (
-        <div>
+        <div className={classes.toolbar}>
             {children}
         </div>
     );
 }
 
-export default Toolbar;
+export default withStyles(styles)(Toolbar);

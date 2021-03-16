@@ -1,6 +1,17 @@
 import React from "react";
-import {Button} from "@material-ui/core";
-import {Link} from 'react-router-dom';
+import {Button, withStyles} from "@material-ui/core";
+import {NavLink} from 'react-router-dom';
+import styles from "./styles";
+
+const Link = withStyles(styles)(
+    React.forwardRef((props, ref) => {
+
+    return (<NavLink
+                activeClassName={props.classes.activeNav}
+                innerRef={ref}
+                {...props}
+            />);
+}));
 
 
 const RegisterLinks = () => {

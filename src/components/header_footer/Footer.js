@@ -1,10 +1,19 @@
 import React from 'react';
+import {Typography, withStyles} from "@material-ui/core";
+import styles from "./styles";
 
 
-const Footer = () => {
+const Footer = ({classes}) => {
     return (
-        <h1>Footer</h1>
+        <Typography
+            variant='caption'
+            className={classes.footer}
+            align='center'
+            paragraph='true'
+        >
+            &copy; Arm Alam | All rights reserved;
+        </Typography>
     );
 }
 
-export default Footer;
+export default withStyles(styles)(Footer);

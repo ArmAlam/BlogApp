@@ -1,20 +1,21 @@
 import React, {useState} from 'react';
-import {AppBar, Toolbar, Typography, Container, Link} from "@material-ui/core";
+import {AppBar, Toolbar, Container, Link, withStyles} from "@material-ui/core";
 import {Link as LinkRouter} from 'react-router-dom';
 import RegisterLinks from "./RegisterLinks";
 import LoginLinks from "./LoginLinks";
+import styles from "./styles";
 
 
-const Header = () => {
+const Header = ({classes}) => {
 
     const [auth, setAuth] = useState(true);
 
 
 
     return (
-        <AppBar position='static'>
+        <AppBar position='static' >
             <Container>
-                <Toolbar>
+                <Toolbar className={classes.toolbar}>
                     <Link
                         to='/'
                         variant='h6'
@@ -24,11 +25,13 @@ const Header = () => {
                     >
                         Blog App
                     </Link>
-                    {auth ? <LoginLinks/> : <RegisterLinks/> }
+                    <div>
+                        {auth ? <LoginLinks/> : <RegisterLinks/> }
+                    </div>
                 </Toolbar>
             </Container>
         </AppBar>
     );
 }
 
-export default Header;
+export default withStyles(styles)(Header);

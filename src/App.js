@@ -13,6 +13,11 @@ function App() {
 
     // const [posts, setPosts] = useState(postsData);
     const {posts, addPosts, updatePost, deletePost} =usePostHook(postsData); // applying custom hook and destructuring
+    const [selectedPost, setSelectedPost] = useState(null);
+    const editPost = (id) => {
+        const findPost = posts.find(post => post.id === id);
+        setSelectedPost(findPost);
+    }
 
   return (
     <>
@@ -24,8 +29,21 @@ function App() {
                          /> }
                   />
                   <Route path='/add' render={ () => <AddPost addPost={addPosts}/>} />
-                  <Route path='/edit/:id' component={EditPost}/>
-                  <Route path='/post/:id' render={ () => <PostDetails posts={posts} deletePost={deletePost}/>}/>
+                  <Route path='/edit/:id' render={ () =>
+                      <EditPost
+                          selectedPost={selectedPost}
+                          updatePost={updatePost}
+                      />
+                    }
+                  />
+                  <Route path='/post/:id'
+                         render={ () =>
+                             <PostDetails
+                                 posts={posts}
+                                 editPost={editPost}
+                                 deletePost={deletePost}
+                             />}
+                  />
                   <Route path='/register' component={Register}/>
                   <Route path='/login' component={Login}/>
                   <Route component={NotFound } />

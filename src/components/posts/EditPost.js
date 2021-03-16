@@ -1,10 +1,14 @@
 import React from 'react';
 import PostForm from "./PostForm";
 
-const EditPost = () => {
+const EditPost = ({editPost, updatePost, selectedPost}) => {
     return (
         <>
-            <PostForm/>
+            <PostForm
+                editPost={editPost}
+                updatePost={updatePost}
+                selectedPost={selectedPost}
+            />
         </>
     );
 }

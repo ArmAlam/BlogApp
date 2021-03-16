@@ -1,18 +1,19 @@
 import React, {useState} from "react";
 import {withFormik, Form, ErrorMessage, Field} from "formik";
-import {TextField, Button, Typography} from "@material-ui/core";
+import {TextField, Button, Typography, withStyles} from "@material-ui/core";
 import * as Yup from 'yup';
-
+import styles from "./styles";
 
 const Login = ({
                       values,
                       isSubmitting,
                       handleChange,
-                      handleBlur
+                      handleBlur,
+                      classes
                   }) => {
 
     return (
-        <>
+        <div className={classes.form}>
             <Typography variant='h5' component='h2'>
                 Login
             </Typography>
@@ -37,21 +38,24 @@ const Login = ({
                     fullWidth
                 />
                 <ErrorMessage name='password' component='div' />
-                <Button disabled={isSubmitting}
-                        type="submit"
-                        variant='contained'
-                        color='primary' >
+                <Button
+                    className={classes.button}
+                    disabled={isSubmitting}
+                    type="submit"
+                    variant='contained'
+                    color='primary'
+                >
                     Login
                 </Button> {/*{disable button during form submission}*/}
             </Form>
-        </>
+        </div>
     );
 }
 
 
 
 // Formik is a higher order component
-export default withFormik({
+export default withStyles(styles)(withFormik({
     mapPropsToValues(){
         return {
             email: '', // returning initial state value
@@ -74,4 +78,4 @@ export default withFormik({
             console.log(values);
         }, 1000);
     }
-})(Login); // Receiving component as an argument and return with some extra capabilities
+})(Login)); // Receiving component as an argument and return with some extra capabilities

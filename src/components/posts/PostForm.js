@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Editor} from 'slate-react';
 import {withRouter} from 'react-router-dom';
 import {v4 as uuid} from 'uuid';
@@ -23,12 +23,31 @@ const categories = [{
     }
 ]
 
-const PostForm = ({addPost, history}) => {
+const PostForm = ({addPost, history, editPost, updatePost, selectedPost}) => {
 
     const [title, setTitle] = useState('');
-    const [error, setError] = useState(false);
+    const [error, setError] = useState({
+        title: '',
+        category: ''
+    });
     const [category, setCategory] = useState([]);
     const [editor, setEditor] = useState(initialValue);
+
+    useEffect( () => {
+
+        if(selectedPost) {
+            const {title, body, img_url, categories} = selectedPost;
+            setTitle(title);
+            setCategory(categories );
+            setEditor(html.deserialize(body));
+        }
+
+        else {
+            setTitle('');
+            setCategory([]);
+            setEditor(html.deserialize('<p>Blog Description...</p>'));
+        }
+    }, [selectedPost]);
 
     const handleEditorChange = ({value}) => {
 
@@ -53,25 +72,46 @@ const PostForm = ({addPost, history}) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if(title === '') {
-            setError(true);
+            setError({
+                ...error,
+                title: 'Title is required'
+            });
             return ;
         }
 
         if(category && category.length === 0)
         {
-            setError(true);
+            setError({
+                ...error,
+                category: 'Category is required'
+            });
             return ;
         }
 
-        const post = {
-            id: uuid(),
-            title,
-            img_url: '3.jpg',
-            categories: category,
-            body: localStorage.getItem('content'),
+        if(selectedPost) {
+            const postToUpdate = {
+                id: uuid(),
+                title,
+                img_url: '3.jpg',
+                categories: category,
+                body: html.serialize(editor),
+            }
+            updatePost(postToUpdate);
         }
 
-        addPost(post);
+        else {
+            const post = {
+                id: selectedPost.id,
+                title,
+                img_url: '3.jpg',
+                categories: category,
+                body: localStorage.getItem('content'),
+            }
+            addPost(post);
+        }
+
+        // clear local storage
+        localStorage.removeItem('content');
 
         // redirecting
         history.push('/');
@@ -81,10 +121,10 @@ const PostForm = ({addPost, history}) => {
         <>
             <form onSubmit={handleSubmit}>
                 <Typography variant='h5' component='h3'>
-                    Add Post
+                    {selectedPost ? 'Edit Post' : 'Add Post'}
                 </Typography>
                 <TextField
-                    error={error}
+                    error={!!error.title}
                     placeholder='Enter blog title'
                     fullWidth
                     value={title}
@@ -97,7 +137,7 @@ const PostForm = ({addPost, history}) => {
                 />
 
                 <Select
-                    error={error}
+                    error={!!error.category}
                     multiple
                     displayEmpty
                     onChange={handleCategory}
@@ -117,13 +157,16 @@ const PostForm = ({addPost, history}) => {
                     }
 
                 </Select>
+
+                <p>{error.category && error.category}</p>
+
                 <br/>
                 <Button
                     type='submit'
                     variant='contained'
                     color='primary'
                 >
-                    Add
+                    {selectedPost ? 'Update Post' : 'Add Post'}
                 </Button>
             </form>
         </>

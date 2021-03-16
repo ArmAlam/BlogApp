@@ -1,12 +1,13 @@
 import React from "react";
 import {Editor} from "slate-react";
-import {Button, Icon} from "@material-ui/core";
+import {Button, Icon, withStyles} from "@material-ui/core";
 import renderBlock from "./renderBlock";
 import renderMark from "./renderMark";
 import Toolbar  from "./Toolbar";
+import styles from "../styles";
 
 
-const MyEditor = ({onChange, value}) =>
+const MyEditor = ({onChange, value, classes}) =>
 {
 
     let refEditor;
@@ -45,7 +46,7 @@ const MyEditor = ({onChange, value}) =>
 
         return (
             <Button
-                className={isActive ? 'active' : ''}
+                className={isActive ? classes.editorActiveBtn : ''}
                 onClick={(e) => onClickMark(e, type)}
             >
                 <Icon>
@@ -124,7 +125,7 @@ const MyEditor = ({onChange, value}) =>
         }
         return (
             <Button
-                className={isActive ? 'active' : ''}
+                className={isActive ? classes.editorActiveBtn : ''}
                 onClick={(e) => onClickBlock(e, type, isActive)}>
                 <Icon>
                     {icon}
@@ -135,7 +136,7 @@ const MyEditor = ({onChange, value}) =>
 
     return (
         <>
-            <Toolbar>
+            <Toolbar >
                 {renderMarkButton('bold', 'format_bold')}
                 {renderMarkButton('italic', 'format_italic')}
                 {renderMarkButton('underline', 'format_underline')}
@@ -146,6 +147,7 @@ const MyEditor = ({onChange, value}) =>
                 {renderBlockButton('code', 'code')}
             </Toolbar>
             <Editor
+                className={classes.editor}
                 value={value}
                 onChange={onChange}
                 onKeyDown={onKeyDown}
@@ -157,4 +159,4 @@ const MyEditor = ({onChange, value}) =>
     );
 }
 
-export default MyEditor;
+export default withStyles(styles)(MyEditor);

@@ -1,6 +1,17 @@
 import React from "react";
-import {Link} from 'react-router-dom';
-import {Button, Fab} from "@material-ui/core";
+import {NavLink} from 'react-router-dom';
+import {Button, Fab, withStyles} from "@material-ui/core";
+import styles from "./styles";
+
+const Link = withStyles(styles)(
+    React.forwardRef((props, ref) => {
+
+        return (<NavLink
+            activeClassName={props.classes.activeNav}
+            innerRef={ref}
+            {...props}
+        />);
+    }));
 
 
 const LoginLinks = () => {

@@ -1,9 +1,10 @@
 import React from 'react';
-import {Typography, Button} from "@material-ui/core";
+import {Typography, Button, withStyles} from "@material-ui/core";
 import {Link} from 'react-router-dom';
 import {truncateText, parseHtml} from '../../utils';
+import styles from "./styles";
 
-const PostSummary = ({post}) => {
+const PostSummary = ({post, classes }) => {
     return (
         <>
             <Typography variant='h5' component='h3'>
@@ -12,6 +13,7 @@ const PostSummary = ({post}) => {
             <Typography variant='body2' dangerouslySetInnerHTML={ parseHtml( truncateText(post.body, 50))}>
             </Typography>
             <Button
+                className={classes.button}
                 component={Link}
                 to={`/post/${post.id}`}
                 variant='contained'
@@ -23,4 +25,4 @@ const PostSummary = ({post}) => {
 }
 
 
-export default PostSummary;
+export default withStyles(styles)(PostSummary);

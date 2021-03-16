@@ -3,7 +3,6 @@ import Typography from "@material-ui/core/Typography";
 import {Posts} from '../posts/index';
 
 const Dashboard = ({posts}) => {
-    console.log(posts);
     return (
         <>
             <Typography variant='h5' component='h3'>
