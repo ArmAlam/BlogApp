@@ -1,25 +1,23 @@
 import React from 'react';
-import {withRouter, Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
+import {useSelector, useDispatch} from 'react-redux'; // useSelector hook ===> retrieves state from store,,,, useDispatch ===> dispatch action
 import {Typography, Button, withStyles} from "@material-ui/core";
 import {parseHtml} from "../../utils";
 import styles from "./styles";
+import {deletePost} from '../../store'
 
 const PostDetails = ({
-        posts,
         match: {params: {id}},
         history,
-        editPost,
-        deletePost,
-        classes
+        classes,
     }) => {
+
+    const dispatch = useDispatch();
+    const posts = useSelector(state => state.posts);
     const findPost = posts.find(post => post.id === id);
 
-    const handleEdit = (id) => {
-        editPost(id);
-    }
-
     const handleDelete = (id) => {
-        deletePost(id);
+        dispatch(deletePost(id));
         history.push('/');
     };
     return (
@@ -46,7 +44,6 @@ const PostDetails = ({
                 to={`/edit/${findPost.id}`}
                 variant='contained'
                 color='primary'
-                onClick={() => handleEdit(findPost.id)}
             >
                 Edit
             </Button>
@@ -62,5 +59,21 @@ const PostDetails = ({
     );
 }
 
+/**
+ * used for connect of redux
+ */
 
-export default withStyles(styles)(withRouter(PostDetails));
+// const mapStateToProps = (state) => {
+//     return {
+//         posts: state.posts,
+//     }
+// }
+//
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         deletePost: (id) => dispatch(deletePost(id))
+//     };
+// }
+
+
+export default withStyles(styles)(PostDetails);

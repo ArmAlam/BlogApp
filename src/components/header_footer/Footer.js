@@ -9,7 +9,7 @@ const Footer = ({classes}) => {
             variant='caption'
             className={classes.footer}
             align='center'
-            paragraph='true'
+            paragraph={true}
         >
             &copy; Arm Alam | All rights reserved;
         </Typography>

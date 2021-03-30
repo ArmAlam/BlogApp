@@ -10,39 +10,27 @@ import postsData from "./data/data";
 import usePostHook from "./components/hooks/post.hook";
 
 function App() {
-
-    // const [posts, setPosts] = useState(postsData);
-    const {posts, addPosts, updatePost, deletePost} =usePostHook(postsData); // applying custom hook and destructuring
-    const [selectedPost, setSelectedPost] = useState(null);
-    const editPost = (id) => {
-        const findPost = posts.find(post => post.id === id);
-        setSelectedPost(findPost);
-    }
-
   return (
     <>
     <BrowserRouter>
           <Layout>
               <Switch>
                   <Route path='/' exact
-                         render={ () => <DashboardIndex posts={posts}
-                         /> }
+                    component={DashboardIndex}
                   />
-                  <Route path='/add' render={ () => <AddPost addPost={addPosts}/>} />
-                  <Route path='/edit/:id' render={ () =>
-                      <EditPost
-                          selectedPost={selectedPost}
-                          updatePost={updatePost}
-                      />
-                    }
+                  <Route
+
+                      path='/add'
+                      component={AddPost}
                   />
-                  <Route path='/post/:id'
-                         render={ () =>
-                             <PostDetails
-                                 posts={posts}
-                                 editPost={editPost}
-                                 deletePost={deletePost}
-                             />}
+
+                  <Route
+                      path='/edit/:id'
+                     component={EditPost}
+                  />
+                  <Route
+                      path='/post/:id'
+                      component={PostDetails}
                   />
                   <Route path='/register' component={Register}/>
                   <Route path='/login' component={Login}/>

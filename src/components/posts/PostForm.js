@@ -2,12 +2,12 @@ import React, {useEffect, useState} from 'react';
 import {Editor} from 'slate-react';
 import {withRouter} from 'react-router-dom';
 import {v4 as uuid} from 'uuid';
+import {useDispatch} from "react-redux";
 import initialValue from "./editor/value";
 import {TextField, Button, Typography, Select, ListItemText, MenuItem} from "@material-ui/core";
 import MyEditor from "./editor";
 import html from "./editor/rules";
-
-// start from installing uuid
+import {addPost, updatePost} from "../../store";
 
 const categories = [{
         label: 'Travel',
@@ -23,8 +23,9 @@ const categories = [{
     }
 ]
 
-const PostForm = ({addPost, history, editPost, updatePost, selectedPost}) => {
+const PostForm = ({history, selectedPost}) => {
 
+    const dispatch = useDispatch();
     const [title, setTitle] = useState('');
     const [error, setError] = useState({
         title: '',
@@ -96,18 +97,18 @@ const PostForm = ({addPost, history, editPost, updatePost, selectedPost}) => {
                 categories: category,
                 body: html.serialize(editor),
             }
-            updatePost(postToUpdate);
+            dispatch(updatePost(postToUpdate, selectedPost.id));
         }
 
         else {
             const post = {
-                id: selectedPost.id,
+                id: uuid(),
                 title,
                 img_url: '3.jpg',
                 categories: category,
                 body: localStorage.getItem('content'),
             }
-            addPost(post);
+            dispatch(addPost(post));
         }
 
         // clear local storage
@@ -172,6 +173,13 @@ const PostForm = ({addPost, history, editPost, updatePost, selectedPost}) => {
         </>
     );
 }
+
+// const mapDispatchToProps = (dispatch) => { // mapDispatchToProps will make addPost available to the PostForm component
+//     return {
+//         addPost: (post) => dispatch(addPost(post)),
+//         updatePost: (post, id) => dispatch(updatePost(post, id))
+//     }
+// }
 
 
 export default withRouter(PostForm);

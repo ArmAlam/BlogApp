@@ -1,9 +1,11 @@
 import React from 'react';
 import {Paper, withStyles} from "@material-ui/core";
+import {connect} from "react-redux";
+import {compose} from "redux";
 import PostSummary from "./PostSummary";
 import styles from "./styles";
 
-const Posts = ({posts, classes}) => {
+const Posts = ({classes, posts}) => {
     return (
         <>
             {posts.map(post => (
@@ -15,5 +17,15 @@ const Posts = ({posts, classes}) => {
     );
 }
 
+const mapStateToProps = (state) => {
+    return {
+        posts: state.posts
+    }
+}
 
-export default withStyles(styles)(Posts);
+
+
+export default compose(
+    connect(mapStateToProps),
+    (withStyles(styles)
+    ))(Posts);
