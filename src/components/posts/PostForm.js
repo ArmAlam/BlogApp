@@ -102,7 +102,6 @@ const PostForm = ({history, selectedPost}) => {
 
         else {
             const post = {
-                id: uuid(),
                 title,
                 img_url: '3.jpg',
                 categories: category,

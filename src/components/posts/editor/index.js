@@ -143,7 +143,7 @@ const MyEditor = ({onChange, value, classes}) =>
                 {renderBlockButton('heading-four', 'looks_4')}
                 {renderBlockButton('unordered-list', 'format_list_bulleted')}
                 {renderBlockButton('ordered-list', 'format_list_numbered')}
-                {renderBlockButton('blockquote', 'format_quote')}
+                {renderBlockButton('block-quote', 'format_quote')}
                 {renderBlockButton('code', 'code')}
             </Toolbar>
             <Editor

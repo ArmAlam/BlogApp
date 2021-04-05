@@ -5,6 +5,9 @@ const styles = {
     },
     button: {
         marginTop: '10px !important'
+    },
+    error: {
+        color: 'red !important'
     }
 }
 
